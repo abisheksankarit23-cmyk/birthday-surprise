@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Birthday Surprise ??</title>
+
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+
+/* ?? Heart */
+.heart {
+  position: absolute;
+  color: red;
+  font-size: 20px;
+  animation: heartAnim 1.5s ease-out forwards;
+}
+
+@keyframes heartAnim {
+  0% { transform: scale(1); opacity: 1; }
+  100% { transform: translate(var(--hx), var(--hy)) scale(0); opacity: 0; }
+}
+/* ?? Party Pop */
+.pop {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  animation: popAnim 1s ease-out forwards;
+}
+
+@keyframes popAnim {
+  0% { transform: scale(1); opacity: 1; }
+  100% { transform: translate(var(--x), var(--y)) scale(0); opacity: 0; }
+}
+
+/* ?? Firework */
+.firework {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  animation: fireworkAnim 1.5s ease-out forwards;
+}
+
+@keyframes fireworkAnim {
+  0% { transform: scale(1); opacity: 1; }
+  100% { transform: translate(var(--fx), var(--fy)) scale(0); opacity: 0; }
+}
+
+
+body {
+  margin: 0;
+  overflow: hidden;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(45deg, yellow, orange, pink);
+  color: blue;
+  text-align: center;
+}
+
+/* Lock Screen */
+#lockScreen {
+  position: absolute;
+  top: 40%;
+  width: 100%;
+}
+
+/* Main hidden */
+#mainContent {
+  display: none;
+}
+
+/* Glowing heading */
+h1 {
+  margin-top: 40px;
+  font-size: 50px;
+  animation: glow 2s infinite alternate;
+}
+
+@keyframes glow {
+  from { text-shadow: 0 0 10px white; }
+  to { text-shadow: 0 0 30px purple, 0 0 60px pink; }
+}
+
+/* Image */
+img {
+  width: 220px;
+  border-radius: 20px;
+  margin-top: 20px;
+  box-shadow: 0 0 20px white;
+}
+
+/* Typing text */
+#message {
+  font-size: 22px;
+  margin-top: 20px;
+  min-height: 30px;
+}
+
+/* Balloons */
+.balloon {
+  position: absolute;
+  bottom: -150px;
+  width: 60px;
+  height: 80px;
+  border-radius: 50%;
+  animation: floatUp linear infinite;
+}
+
+@keyframes floatUp {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-120vh); }
+}
+</style>
+</head>
+
+<body>
+
+<!-- Music -->
+<audio id="music" src="birthday.mp3"></audio>
+
+<!-- Lock -->
+<div id="lockScreen">
+  <h2>?? Enter Secret Code</h2>
+  <input type="password" id="code">
+  <br><br>
+  <button onclick="checkCode()">Unlock ??</button>
+</div>
+
+<!-- Main -->
+<div id="mainContent">
+  <h1>?? Happy Birthday ??<br>?? My Special person
+
+ ??</h1>
+
+  <img src="bday82.jpg">
+
+  <div id="message"></div>
+</div>
+<!-- ?? Second Secret Lock -->
+<div id="secondLock">
+  <h3>?? itz you</h3>
+  <input type="password" id="code2">
+  <br><br>
+  <button onclick="checkCode2()">Unlock ??</button>
+</div>
+
+<!-- Hidden Secret Message -->
+<div id="secretMessage" style="display:none; font-size:22px; margin-top:20px;">
+  
+
+Heyy my loosu ??
+Un birthday na enakku romba special day dii… because indha world ku nee vandha naal ???
+
+Nee en life la vandhadhum everything konjam better aayiduchu… un smile, un care, un pesura style ellam enakku romba pidikkum ??
+
+I’m really lucky to have you… seriously, un madhiri oru person kedaikradhu romba rare ??
+
+Innikki nee romba happy ah irukanum, un wishes ellam nadakanum… naan always un kooda iruppen ??
+
+Happy Birthday da my special one ????
+Love you sooo much ??
+
+
+
+
+
+</div>
+
+<script>
+
+function heartBurst(x, y){
+  for(let i=0;i<40;i++){
+    let h = document.createElement("div");
+    h.className = "heart";
+    h.innerHTML = "??";
+
+    h.style.left = x + "px";
+    h.style.top = y + "px";
+
+    let angle = Math.random()*2*Math.PI;
+    let distance = Math.random()*120;
+
+    h.style.setProperty('--hx', Math.cos(angle)*distance + "px");
+    h.style.setProperty('--hy', Math.sin(angle)*distance + "px");
+
+    document.body.appendChild(h);
+
+    setTimeout(()=>h.remove(),1500);
+  }
+}
+function checkCode() {
+  let code = document.getElementById("code").value;
+
+  if(code === "sandy") {
+    document.getElementById("lockScreen").style.display = "none";
+    document.getElementById("mainContent").style.display = "block";
+
+    document.getElementById("music").play(); // music start
+partyPop(window.innerWidth/2, window.innerHeight/2);
+setInterval(createFirework, 2000);
+
+    startEffects();
+/* ?? Party Pop Burst */
+function partyPop(x, y){
+  for(let i=0;i<30;i++){
+    let p = document.createElement("div");
+    p.className="pop";
+    p.style.left = x + "px";
+    p.style.top = y + "px";
+    p.style.background = `hsl(${Math.random()*360},100%,50%)`;
+
+    let angle = Math.random()*2*Math.PI;
+    let distance = Math.random()*100;
+
+    p.style.setProperty('--x', Math.cos(angle)*distance + "px");
+    p.style.setProperty('--y', Math.sin(angle)*distance + "px");
+
+    document.body.appendChild(p);
+
+    setTimeout(()=>p.remove(),1000);
+  }
+}
+
+/* ?? Firework Sky */
+function createFirework(){
+  let x = Math.random()*window.innerWidth;
+  let y = Math.random()*window.innerHeight/2;
+
+  for(let i=0;i<40;i++){
+    let f = document.createElement("div");
+    f.className="firework";
+    f.style.left = x + "px";
+    f.style.top = y + "px";
+    f.style.background = `hsl(${Math.random()*360},100%,50%)`;
+
+    let angle = Math.random()*2*Math.PI;
+    let distance = Math.random()*150;
+
+    f.style.setProperty('--fx', Math.cos(angle)*distance + "px");
+    f.style.setProperty('--fy', Math.sin(angle)*distance + "px");
+
+    document.body.appendChild(f);
+
+    setTimeout(()=>f.remove(),1500);
+  }
+}
+    typeMessage();
+  } else {
+    alert("Wrong Code ??");
+  }
+}
+
+/* Typing Effect */
+let text = "?? From the moment I met you... everything became special ???\n\
+?? Your smile is my favorite thing in this world...\n\
+?? I don’t know how, but you became my happiness ??\n\
+?? Happy Birthday to the one who means a lot to me ??";
+let i = 0;
+
+function typeMessage() {
+  if(i < text.length){
+    document.getElementById("message").innerHTML += text.charAt(i);
+    i++;
+    setTimeout(typeMessage, 50);
+  }
+}
+
+/* Balloons */
+function startEffects(){
+  for(let i=0;i<20;i++){
+    let b=document.createElement("div");
+    b.className="balloon";
+    b.style.left=Math.random()*100+"%";
+    b.style.background=`hsl(${Math.random()*360},100%,50%)`;
+    b.style.animationDuration=(5+Math.random()*5)+"s";
+    document.body.appendChild(b);
+  }
+}
+
+function checkCode2() {
+  let code2 = document.getElementById("code2").value;
+
+  if(code2 === "chlooww") {
+    document.getElementById("secretMessage").style.display = "block";
+    document.getElementById("secondLock").style.display = "none";
+
+    heartBurst(window.innerWidth/2, window.innerHeight/2); // ?? BOOM
+  } else {
+    alert("Wrong Secret Code ??");
+  }
+}
+</script>
+
+</body>
+</html>
